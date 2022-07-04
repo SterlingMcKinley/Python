@@ -5,24 +5,30 @@
 
 import random
 
-def play():
-    user = input("What's your choice? 'r' for rock, 'p' for paper, 's' for scissors\n")
-    computer = random.choice(['r', 'p', 's'])
+while True:
+    user_action = input("Enter a choice (rock, paper, scissors): ")
+    possible_actions = ["rock", "paper", "scissors"]
+    computer_action = random.choice(possible_actions)
+    print(f"\nYou chose {user_action}, computer chose {computer_action}.\n")
 
-    if user == computer:
-        return 'It\'s a tie'
+    if user_action == computer_action:
+        print(f"Both players selected {user_action}. It's a tie!")
+    elif user_action == "rock":
+        if computer_action == "scissors":
+            print("Rock smashes scissors! You win!")
+        else:
+            print("Paper covers rock! You lose.")
+    elif user_action == "paper":
+        if computer_action == "rock":
+            print("Paper covers rock! You win!")
+        else:
+            print("Scissors cuts paper! You lose.")
+    elif user_action == "scissors":
+        if computer_action == "paper":
+            print("Scissors cuts paper! You win!")
+        else:
+            print("Rock smashes scissors! You lose.")
 
-    # r > s, s > p, p > r
-    if is_win(user, computer):
-        return 'You won!'
-    
-    return 'You lost!'
-
-def is_win(player, opponent):
-    #return true if player wins
-    # r > s, s > p, p > r
-    if (player  == 'r' and opponent == 's') or (player == 's' and opponent == 'p') \
-        or (player == 'p' and opponent == 'r'):
-        return True
-
-print(play())
+    play_again = input("Play again? (y/n): ")
+    if play_again.lower() != "y":
+        break
